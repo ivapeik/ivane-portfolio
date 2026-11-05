@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Ivane Peikrishvili, full-stack developer</title>
+  <meta name="description" content="Ivane Peikrishvili builds web products end to end, from the interface to the systems behind it.">
+  <meta name="theme-color" content="#0a0e19">
+
+  <!-- Font: Changa One for everything -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&display=swap">
+
+  <!-- Start loading the turntable photos straight away -->
+  <link rel="preload" href="assets/turntable.webp" as="image" type="image/webp">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Lets the CSS know JavaScript is running (used for the opening animation) -->
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+
+<body class="page-home">
+
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <a class="site-header__mark" href="index.html" aria-label="Ivane Peikrishvili, home">IP</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="about.html">About</a>
+    </nav>
+    <p class="site-header__status">Open to new projects</p>
+  </header>
+
+  <main>
+    <!-- ===== Hero: the turntable =====
+         data-turntable points to the 40-photo atlas used by js/turntable.js -->
+    <section class="hero" aria-label="Introduction" data-turntable="assets/turntable.webp">
+
+      <canvas class="hero__stage" aria-hidden="true"></canvas>
+      <img class="hero__fallback" src="assets/portrait-front.webp" alt="" aria-hidden="true">
+      <div class="hero__grain" aria-hidden="true"></div>
+      <div class="hero__letterbox" aria-hidden="true"><span></span><span></span></div>
+
+      <!-- Name and introduction -->
+      <div class="hero__intro">
+        <h1 class="hero__name">
+          <span class="line"><span>Ivane</span></span>
+          <span class="line"><span>Peikrishvili</span></span>
+        </h1>
+        <p class="hero__lede">
+          Full-stack developer. I build web products end to end, from the interface
+          people touch to the systems they never see.
+        </p>
+        <div class="actions">
+          <a class="button" href="about.html">Read my CV</a>
+          <a class="text-link" href="about.html#contact">Get in touch</a>
+        </div>
+      </div>
+
+      <!-- The stack. Each layer matches one side of the figure (data-angle). -->
+      <aside class="layers" aria-label="What I work on">
+        <p class="layers__hint">Point at me to turn me around. Front end on one side, back end on the other.</p>
+        <ol class="layers__list">
+          <li class="layers__item is-active" data-angle="0">
+            <button class="layers__button" type="button" aria-pressed="true">Front end</button>
+            <div class="layers__detail"><div>
+              <p>Interfaces that load fast, read clearly and work for everyone.</p>
+              <p class="layers__tools">React, Next.js, TypeScript, CSS</p>
+            </div></div>
+          </li>
+          <li class="layers__item" data-angle="90">
+            <button class="layers__button" type="button" aria-pressed="false">API layer</button>
+            <div class="layers__detail"><div>
+              <p>Clear contracts between the screen and the data, typed end to end.</p>
+              <p class="layers__tools">REST, GraphQL, tRPC, OpenAPI</p>
+            </div></div>
+          </li>
+          <li class="layers__item" data-angle="180">
+            <button class="layers__button" type="button" aria-pressed="false">Back end</button>
+            <div class="layers__detail"><div>
+              <p>Services, data models and background jobs that stay calm under load.</p>
+              <p class="layers__tools">Node.js, PostgreSQL, Redis, Prisma</p>
+            </div></div>
+          </li>
+          <li class="layers__item" data-angle="270">
+            <button class="layers__button" type="button" aria-pressed="false">Delivery</button>
+            <div class="layers__detail"><div>
+              <p>Pipelines, hosting and monitoring, so releases are routine.</p>
+              <p class="layers__tools">Docker, AWS, Vercel, GitHub Actions</p>
+            </div></div>
+          </li>
+        </ol>
+      </aside>
+
+      <!-- Angle readout. Also a keyboard control: arrow keys turn the figure. -->
+      <div class="hero__dial" role="slider" tabindex="0"
+           aria-label="Turn the portrait" aria-valuemin="0" aria-valuemax="359"
+           aria-valuenow="0" aria-valuetext="0 degrees, front end">
+        <span class="dial__value">0°</span>
+        <span class="dial__hint">
+          <span class="hint-mouse">Point at me to turn</span>
+          <span class="hint-touch">Swipe to turn</span>
+        </span>
+      </div>
+
+      <p class="visually-hidden">
+        Portrait of Ivane in a navy suit, standing on a turntable.
+        Turning it changes which part of the stack is described.
+      </p>
+    </section>
+  </main>
+
+  <script src="js/turntable.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

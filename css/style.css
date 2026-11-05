@@ -1,0 +1,1611 @@
+/* ==========================================================================
+   Ivane Peikrishvili, portfolio
+   --------------------------------------------------------------------------
+   One stylesheet for every page. Sections:
+
+    1. Design tokens
+    2. Base
+    3. Layout helpers
+    4. Header
+    5. Buttons and links
+    6. Footer
+    7. Inner page title
+    8. Home: turntable hero
+    9. Work page
+   10. About page (CV)
+   11. Contact page
+   12. Page transitions
+   13. Small screens
+   14. Reduced motion
+   15. Print (the About page prints as a CV)
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. Design tokens
+   ========================================================================== */
+
+:root {
+  /* colour */
+  --ink: #0a0e19;                          /* page background, matched to the navy suit */
+  --ink-raised: #111726;                   /* frames and surfaces */
+  --tungsten: #e8b97e;                     /* the stage light; used sparingly */
+  --ivory: #ede6d8;                        /* main text */
+  --ivory-soft: rgba(237, 230, 216, 0.78); /* paragraphs */
+  --steel: #8c94a6;                        /* secondary text */
+  --line: rgba(237, 230, 216, 0.12);       /* hairlines */
+  --line-strong: rgba(237, 230, 216, 0.3);
+
+  /* type */
+  --font-display: "Changa One", "Arial Black", Impact, sans-serif;
+  --font-body: "Changa One", "Arial Black", Impact, sans-serif;
+  --font-georgian: "Noto Sans Georgian", "BPG Arial", Sylfaen, sans-serif;
+
+  /* spacing */
+  --gutter: clamp(20px, 5.5vw, 88px);      /* left and right page margin */
+  --page-width: 1320px;
+  --section-space: clamp(88px, 14vh, 168px);
+
+  /* motion */
+  --ease-out: cubic-bezier(0.16, 0.84, 0.24, 1);
+}
+
+
+/* ==========================================================================
+   2. Base
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--ink);
+  color: var(--ivory);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  letter-spacing: 0.012em;
+  word-spacing: 0.12em;     /* Changa One has narrow spaces; this keeps small text readable */
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+dl,
+dd,
+figure {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--tungsten);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 1.5px solid var(--tungsten);
+  outline-offset: 5px;
+  border-radius: 4px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+[lang="ka"] {
+  font-family: var(--font-georgian);
+}
+
+
+/* ==========================================================================
+   3. Layout helpers
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: calc(var(--page-width) + var(--gutter) * 2);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+
+/* ==========================================================================
+   4. Header (the same on every page)
+   ========================================================================== */
+
+.site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: clamp(18px, 3.4vh, 36px) var(--gutter);
+}
+
+.site-header__mark {
+  justify-self: start;
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  gap: clamp(22px, 3.2vw, 48px);
+}
+
+.site-nav a {
+  padding: 6px 0;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--steel);
+  text-decoration: none;
+  transition: color 0.25s;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  color: var(--ivory);
+}
+
+.site-nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-color: var(--tungsten);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 8px;
+}
+
+.site-header__status {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--steel);
+}
+
+.site-header__status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--tungsten);
+  box-shadow: 0 0 10px 2px rgba(232, 185, 126, 0.45);
+}
+
+
+/* ==========================================================================
+   5. Buttons and links
+   ========================================================================== */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 26px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: none;
+  color: var(--ivory);
+  font: inherit;
+  font-size: 15px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.button:hover {
+  background: var(--ivory);
+  border-color: var(--ivory);
+  color: var(--ink);
+}
+
+.text-link {
+  font-size: 15px;
+  color: var(--ivory);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 7px;
+  text-decoration-color: rgba(237, 230, 216, 0.35);
+  transition: text-decoration-color 0.3s;
+}
+
+.text-link:hover {
+  text-decoration-color: var(--tungsten);
+}
+
+/* a <button> that looks like .text-link */
+.link-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 30px;
+}
+
+
+/* ==========================================================================
+   6. Footer
+   ========================================================================== */
+
+.site-footer {
+  border-top: 1px solid var(--line);
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px 32px;
+  padding-top: 36px;
+  padding-bottom: 40px;
+  font-size: 14px;
+  color: var(--steel);
+}
+
+.site-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+}
+
+.site-footer a {
+  text-decoration: none;
+  transition: color 0.25s;
+}
+
+.site-footer a:hover {
+  color: var(--ivory);
+}
+
+
+/* ==========================================================================
+   7. Inner page title (Work, About, Contact)
+   ========================================================================== */
+
+.page-intro {
+  padding-top: clamp(140px, 24vh, 240px);
+  padding-bottom: clamp(56px, 9vh, 104px);
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3.2rem, 8.4vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+}
+
+.page-lede {
+  margin-top: clamp(22px, 3.4vh, 34px);
+  max-width: 44ch;
+  font-size: clamp(17px, 1.35vw, 20px);
+  color: var(--ivory-soft);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 2.4vw, 2.2rem);
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+
+/* ==========================================================================
+   8. Home: turntable hero
+   --------------------------------------------------------------------------
+   --fig-x, --fig-top and --fig-bottom place the figure (as fractions of the
+   hero). js/turntable.js reads them, so adjust the figure here.
+   ========================================================================== */
+
+.hero {
+  --fig-x: 0.565;
+  --fig-top: 0.14;
+  --fig-bottom: 0.76;
+  --dial-gap: 0.085;
+
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 620px;
+  overflow: hidden;
+  background: var(--ink);
+  cursor: grab;
+  touch-action: pan-y;          /* horizontal drags turn the figure, vertical ones scroll */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.hero.is-dragging {
+  cursor: grabbing;
+}
+
+.hero__intro,
+.hero .layers {
+  cursor: auto;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.hero__stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* still image when WebGL is not available */
+.hero__fallback {
+  display: none;
+  position: absolute;
+  left: calc(var(--fig-x) * 100%);
+  top: calc((var(--fig-top) - (var(--fig-bottom) - var(--fig-top)) * 0.016) * 100%);
+  height: calc((var(--fig-bottom) - var(--fig-top)) * 103.7%);
+  width: auto;
+  transform: translateX(-50%);
+  filter: brightness(0.85) contrast(1.05);
+}
+
+.hero.is-static .hero__fallback {
+  display: block;
+}
+
+.hero.is-static .hero__dial,
+.hero.is-static .layers__hint {
+  display: none;
+}
+
+/* film grain over the picture, under the type */
+.hero__grain {
+  position: absolute;
+  inset: -100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.14;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='.33 .33 .33 0 0 .33 .33 .33 0 0 .33 .33 .33 0 0 0 0 0 0 1'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation: grain 1s steps(5) infinite;
+}
+
+@keyframes grain {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-7%, 4%); }
+  40%  { transform: translate(5%, -6%); }
+  60%  { transform: translate(-3%, -9%); }
+  80%  { transform: translate(8%, 3%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* letterbox bars for the opening shot */
+.hero__letterbox span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 6;
+  height: 11vh;
+  background: #000;
+  pointer-events: none;
+  transition: transform 1.3s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.hero__letterbox span:first-child {
+  top: 0;
+}
+
+.hero__letterbox span:last-child {
+  bottom: 0;
+}
+
+.is-revealed .hero__letterbox span:first-child {
+  transform: translateY(-101%);
+}
+
+.is-revealed .hero__letterbox span:last-child {
+  transform: translateY(101%);
+}
+
+/* name and introduction, bottom left */
+.hero__intro {
+  position: absolute;
+  z-index: 3;
+  left: var(--gutter);
+  bottom: clamp(56px, 13vh, 150px);
+  width: min(46vw, 780px);
+}
+
+.hero__name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3.1rem, 7.3vw, 8.6rem);
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+}
+
+.hero__name .line {
+  display: block;
+  white-space: nowrap;
+  padding-bottom: 0.07em;
+  margin-bottom: -0.07em;
+}
+
+.hero__name .line + .line {
+  padding-left: 0.62em;
+}
+
+.hero__name .line span {
+  display: block;
+}
+
+.hero__lede {
+  margin-top: clamp(22px, 3.6vh, 36px);
+  max-width: 35ch;
+  font-size: clamp(15px, 1.12vw, 17.5px);
+  color: var(--ivory-soft);
+}
+
+.hero__intro .actions {
+  margin-top: clamp(24px, 3.6vh, 34px);
+}
+
+/* the stack, bound to the turntable (right) */
+.layers {
+  position: absolute;
+  z-index: 3;
+  right: var(--gutter);
+  top: 50%;
+  width: min(23vw, 330px);
+  transform: translateY(-44%);
+}
+
+.layers__hint {
+  max-width: 30ch;
+  margin-bottom: clamp(20px, 3.4vh, 34px);
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--steel);
+}
+
+.layers__button {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 7px 0;
+  border: 0;
+  background: none;
+  font-family: var(--font-display);
+  font-size: clamp(21px, 1.85vw, 28px);
+  line-height: 1.15;
+  letter-spacing: 0;
+  color: var(--steel);
+  cursor: pointer;
+  transition: color 0.4s;
+}
+
+/* the small tungsten marker that slides in front of the active layer */
+.layers__button::before {
+  content: "";
+  flex: none;
+  width: 0;
+  height: 1px;
+  margin-right: 0;
+  background: var(--tungsten);
+  transition: width 0.55s var(--ease-out), margin-right 0.55s var(--ease-out);
+}
+
+.layers__button:hover,
+.layers__item.is-active .layers__button {
+  color: var(--ivory);
+}
+
+.layers__item.is-active .layers__button::before {
+  width: 28px;
+  margin-right: 14px;
+}
+
+/* the description opens under the active layer */
+.layers__detail {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.55s var(--ease-out), opacity 0.45s;
+}
+
+.layers__detail > div {
+  overflow: hidden;
+  padding-left: 42px;
+}
+
+.layers__item.is-active .layers__detail {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.layers__detail p {
+  max-width: 32ch;
+  padding-top: 4px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ivory-soft);
+}
+
+.layers__detail .layers__tools {
+  padding: 6px 0 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--steel);
+}
+
+/* angle readout on the stage floor, in front of the feet */
+.hero__dial {
+  position: absolute;
+  z-index: 3;
+  left: calc(var(--fig-x) * 100%);
+  top: calc((var(--fig-bottom) + (var(--fig-bottom) - var(--fig-top)) * var(--dial-gap)) * 100%);
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transform: translateX(-50%);
+  font-size: 13px;
+  line-height: 1;
+  color: var(--steel);
+  white-space: nowrap;
+}
+
+.dial__value {
+  min-width: 3.4ch;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--ivory);
+}
+
+.hero.has-turned .dial__hint {
+  opacity: 0;
+  transition: opacity 0.8s 0.4s;
+}
+
+.hint-touch {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .hint-mouse { display: none; }
+  .hint-touch { display: inline; }
+}
+
+/* ---------- 3D text ----------
+   The hero copy leans gently toward the pointer. js/turntable.js sets
+   --tilt-x and --tilt-y (each -1..1) on .hero. */
+.hero__intro {
+  transform: perspective(1400px)
+             rotateY(calc(var(--tilt-x, 0) * 7deg))
+             rotateX(calc(var(--tilt-y, 0) * -5deg));
+  transform-origin: 0% 50%;
+}
+
+.layers__list {
+  transform: perspective(1400px)
+             rotateY(calc(var(--tilt-x, 0) * 7deg))
+             rotateX(calc(var(--tilt-y, 0) * -5deg));
+  transform-origin: 100% 50%;
+}
+
+/* layer names swing toward you on hover */
+.layers__button {
+  transform-origin: 0% 50%;
+  transition: color 0.4s, transform 0.5s var(--ease-out);
+}
+
+.layers__button:hover {
+  transform: perspective(500px) rotateY(-14deg) translateZ(14px);
+}
+
+/* Opening sequence: every line of text flips up into place, like a card
+   standing up. Hidden until js/turntable.js adds .is-revealed. */
+.js .hero__name .line span,
+.js .hero__lede,
+.js .hero__intro .actions,
+.js .layers__hint,
+.js .layers__item,
+.js .hero__dial,
+.js .page-home .site-header {
+  opacity: 0;
+  transform: perspective(700px) rotateX(-80deg) translateY(30%);
+  transform-origin: 50% 100%;
+  transition: transform 1.2s var(--ease-out), opacity 0.7s ease-out;
+}
+
+.js .hero__name .line span          { transition-delay: 0s; }
+.js .hero__name .line + .line span  { transition-delay: 0.12s; }
+.js .hero__lede                     { transition-delay: 0.3s; }
+.js .hero__intro .actions           { transition-delay: 0.45s; }
+.js .layers__hint                   { transition-delay: 0.5s; }
+.js .layers__item:nth-child(1)      { transition-delay: 0.58s; }
+.js .layers__item:nth-child(2)      { transition-delay: 0.66s; }
+.js .layers__item:nth-child(3)      { transition-delay: 0.74s; }
+.js .layers__item:nth-child(4)      { transition-delay: 0.82s; }
+.js .hero__dial                     { transition-delay: 0.9s; }
+.js .page-home .site-header         { transform: none; transition-delay: 0.6s; }
+
+.js.is-revealed .hero__name .line span,
+.js.is-revealed .hero__lede,
+.js.is-revealed .hero__intro .actions,
+.js.is-revealed .layers__hint,
+.js.is-revealed .layers__item,
+.js.is-revealed .page-home .site-header {
+  opacity: 1;
+  transform: none;
+}
+
+/* the readout keeps its own centring transform */
+.js.is-revealed .hero__dial {
+  opacity: 1;
+  transform: translateX(-50%);
+}
+
+.js .hero__dial {
+  transform: translateX(-50%) perspective(700px) rotateX(-80deg);
+}
+
+/* 3D reveal for other pages: js/main.js adds .is-in when a block scrolls into view */
+.js .cv__name .line {
+  display: block;
+}
+
+.js [data-reveal],
+.js .cv__name .line {
+  opacity: 0;
+  transform: perspective(900px) rotateX(-70deg) translateY(24px);
+  transform-origin: 50% 100%;
+  transition: transform 1.1s var(--ease-out), opacity 0.7s ease-out;
+}
+
+.js .cv__name .line + .line {
+  transition-delay: 0.12s;
+}
+
+.js [data-reveal].is-in,
+.js .cv__name.is-in .line {
+  opacity: 1;
+  transform: none;
+}
+
+/* inside a CV section the heading flips first, then its content */
+.js .cv__section[data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+.js .cv__section[data-reveal] > * {
+  opacity: 0;
+  transform: perspective(900px) rotateX(-70deg) translateY(24px);
+  transform-origin: 50% 100%;
+  transition: transform 1.1s var(--ease-out), opacity 0.7s ease-out;
+}
+
+.js .cv__section[data-reveal] > * + * {
+  transition-delay: 0.14s;
+}
+
+.js .cv__section[data-reveal].is-in > * {
+  opacity: 1;
+  transform: none;
+}
+
+/* small laptops and tablets on their side */
+@media (min-width: 900px) and (max-width: 1199px) and (min-aspect-ratio: 1/1) {
+  .hero {
+    --fig-x: 0.54;
+    --fig-top: 0.2;
+    --fig-bottom: 0.71;
+  }
+
+  .hero__name {
+    font-size: 6.3vw;
+  }
+
+  .hero__intro {
+    bottom: clamp(48px, 10vh, 96px);
+  }
+
+  .layers {
+    top: 45%;
+    width: 25vw;
+  }
+}
+
+
+/* ==========================================================================
+   9. Work page
+   ========================================================================== */
+
+.project {
+  padding-top: var(--section-space);
+  padding-bottom: var(--section-space);
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 24px;
+}
+
+.project__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px 40px;
+  margin-bottom: clamp(36px, 6vh, 64px);
+}
+
+.project__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.8rem, 6.4vw, 6rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+}
+
+.project__native {
+  display: block;
+  margin-top: 14px;
+  font-size: 15px;
+  color: var(--steel);
+}
+
+/* the main screenshot in a browser frame, with the phone view on top */
+.project__visual {
+  position: relative;
+  margin-bottom: clamp(120px, 15vh, 176px);   /* room for the phone hanging below */
+}
+
+.browser {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--ink-raised);
+  box-shadow: 0 50px 90px -50px rgba(0, 0, 0, 0.9);
+}
+
+.browser__bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 36px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.browser__bar i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+
+.browser__address {
+  margin-left: 14px;
+  font-size: 12px;
+  color: var(--steel);
+}
+
+.browser img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.phone {
+  position: absolute;
+  right: 3%;
+  bottom: -64px;
+  width: clamp(110px, 12%, 176px);
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 26px;
+  background: #000;
+  box-shadow: 0 40px 70px -30px rgba(0, 0, 0, 0.95);
+}
+
+.phone img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 540 / 1169;
+}
+
+/* facts on the left, story on the right */
+.project__body {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: 48px clamp(40px, 6vw, 120px);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px 28px;
+  align-content: start;
+  font-size: 15px;
+}
+
+.facts dt {
+  color: var(--steel);
+}
+
+.facts dd a {
+  text-decoration-color: var(--tungsten);
+  text-underline-offset: 5px;
+}
+
+.project__text > p {
+  max-width: 60ch;
+  font-size: clamp(17px, 1.3vw, 19px);
+  color: var(--ivory-soft);
+}
+
+.highlights {
+  margin-top: 32px;
+  border-top: 1px solid var(--line);
+}
+
+.highlights li {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+  color: var(--ivory-soft);
+}
+
+/* two more screenshots */
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(16px, 2vw, 28px);
+  margin-top: clamp(56px, 9vh, 104px);
+}
+
+.gallery img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.gallery figcaption {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--steel);
+}
+
+/* invitation at the end of the page */
+.closing {
+  padding-top: var(--section-space);
+  padding-bottom: var(--section-space);
+  border-top: 1px solid var(--line);
+}
+
+.closing__title {
+  max-width: 16ch;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 5vw, 4.6rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+
+.closing .actions {
+  margin-top: 36px;
+}
+
+
+/* ==========================================================================
+   10. About page (CV)
+   ========================================================================== */
+
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(40px, 6vw, 120px);
+  padding-top: clamp(120px, 18vh, 180px);
+  padding-bottom: var(--section-space);
+}
+
+/* the portrait stays in view while the CV scrolls */
+.about__portrait {
+  position: sticky;
+  top: 96px;
+  height: calc(100vh - 140px);
+  min-height: 520px;
+  max-height: 860px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.about__portrait::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 46% at 50% 46%, rgba(232, 185, 126, 0.08), transparent 100%);
+}
+
+.about__portrait::after {
+  content: "";
+  position: absolute;
+  bottom: -2%;
+  left: 18%;
+  right: 18%;
+  height: 7%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.65), transparent);
+}
+
+.about__portrait img {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  width: auto;
+  filter: brightness(0.9) contrast(1.05) saturate(0.95);
+}
+
+.cv__name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3rem, 6.4vw, 6rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+}
+
+.cv__role {
+  margin-top: 18px;
+  font-size: clamp(17px, 1.35vw, 20px);
+  color: var(--ivory-soft);
+}
+
+.cv__intro .actions {
+  margin-top: 32px;
+}
+
+.cv__section {
+  display: grid;
+  grid-template-columns: minmax(130px, 1fr) minmax(0, 3fr);
+  gap: 20px 40px;
+  margin-top: clamp(56px, 8vh, 88px);
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.cv__text p {
+  max-width: 58ch;
+  color: var(--ivory-soft);
+}
+
+.cv__text p + p {
+  margin-top: 16px;
+}
+
+.cv__facts {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px 32px;
+  font-size: 16px;
+}
+
+.cv__facts dt {
+  color: var(--steel);
+}
+
+.entry-list li {
+  padding: 4px 0 22px;
+}
+
+.entry-list li + li {
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.entry__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.35rem, 1.8vw, 1.6rem);
+  line-height: 1.2;
+}
+
+.entry__meta {
+  margin-top: 6px;
+  font-size: 15px;
+  color: var(--steel);
+}
+
+.entry__title a {
+  text-decoration: none;
+}
+
+.entry__title a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--tungsten);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+}
+
+.skills {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 40px;
+}
+
+.skills h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.35rem;
+}
+
+.skills p {
+  margin-top: 6px;
+  font-size: 15px;
+  color: var(--steel);
+}
+
+
+/* contact section at the end of the CV */
+.contact-links {
+  display: grid;
+  gap: 28px;
+}
+
+.contact-links .actions {
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   11. Contact details
+   ========================================================================== */
+
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: 56px clamp(48px, 8vw, 140px);
+  padding-bottom: var(--section-space);
+}
+
+.form {
+  display: grid;
+  gap: 30px;
+}
+
+.form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 14px;
+  color: var(--steel);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 12px 0;
+  border: 0;
+  border-bottom: 1px solid var(--line-strong);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ivory);
+  font: inherit;
+  font-size: 18px;
+  transition: border-color 0.25s;
+}
+
+.field textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--tungsten);
+}
+
+.field input[aria-invalid="true"],
+.field textarea[aria-invalid="true"] {
+  border-bottom-color: #e58b7b;
+}
+
+.field__error {
+  min-height: 1.4em;
+  font-size: 14px;
+  color: #e9a091;
+}
+
+.form__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 28px;
+}
+
+.form__status {
+  font-size: 14px;
+  color: var(--steel);
+}
+
+.direct {
+  display: grid;
+  gap: 32px;
+  align-content: start;
+}
+
+.direct__label {
+  font-size: 14px;
+  color: var(--steel);
+}
+
+.direct__value {
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.direct__value a {
+  text-decoration: none;
+}
+
+.direct__value a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--tungsten);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+}
+
+.copy-button {
+  margin-top: 10px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--steel);
+  font: inherit;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  cursor: pointer;
+}
+
+.copy-button:hover {
+  color: var(--ivory);
+}
+
+
+/* ==========================================================================
+   12. Page transitions (a soft cross-fade between pages, where supported)
+   ========================================================================== */
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.45s;
+}
+
+
+/* ==========================================================================
+   13. Small screens
+   ========================================================================== */
+
+@media (max-width: 899px), (max-aspect-ratio: 1/1) {
+
+  /* header: the status line gives way to the menu */
+  .site-header {
+    grid-template-columns: 1fr auto;
+  }
+
+  .site-header__status {
+    display: none;
+  }
+
+  /* hero: name and text on the left, figure on the right, layers at the bottom */
+  .hero {
+    --fig-x: 0.74;
+    --fig-top: 0.2;
+    --fig-bottom: 0.68;
+    --dial-gap: 0.06;
+    min-height: 640px;
+  }
+
+  .hero__intro {
+    top: clamp(84px, 12vh, 120px);
+    bottom: auto;
+    left: var(--gutter);
+    right: auto;
+    width: 54%;
+  }
+
+  .hero__name {
+    font-size: clamp(1.9rem, 8.6vw, 4.4rem);
+  }
+
+  .hero__name .line + .line {
+    padding-left: 0;
+  }
+
+  .hero__lede {
+    margin-top: 14px;
+    max-width: none;
+    font-size: 14px;
+  }
+
+  .hero__intro .actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .hero .button {
+    height: 44px;
+    padding: 0 22px;
+  }
+
+  .layers {
+    top: auto;
+    bottom: clamp(14px, 2.6vh, 28px);
+    left: var(--gutter);
+    right: var(--gutter);
+    width: auto;
+    transform: none;
+  }
+
+  /* soft dark band so the layer names stay readable over the floor */
+  .layers::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: calc(var(--gutter) * -1);
+    right: calc(var(--gutter) * -1);
+    bottom: -40px;
+    height: calc(100% + 90px);
+    pointer-events: none;
+    background: linear-gradient(to top, var(--ink) 35%, rgba(10, 14, 25, 0.82) 70%, rgba(10, 14, 25, 0));
+  }
+
+  .layers__hint {
+    display: none;
+  }
+
+  /* on phones the layer items are laid out as tabs (display: contents),
+     so the whole row flips up together */
+  .js .hero .layers {
+    opacity: 0;
+    transform: perspective(700px) rotateX(-80deg);
+    transform-origin: 50% 100%;
+    transition: transform 1.2s var(--ease-out) 0.58s, opacity 0.7s ease-out 0.58s;
+  }
+
+  .js.is-revealed .hero .layers {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* the four layers become a row of tabs */
+  .layers__list {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    justify-content: space-between;
+    column-gap: 12px;
+  }
+
+  .layers__item {
+    display: contents;
+  }
+
+  .layers__button {
+    grid-row: 1;
+    padding: 8px 0 9px;
+    border-bottom: 1px solid transparent;
+    font-size: clamp(15px, 4.1vw, 21px);
+    white-space: nowrap;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .layers__button::before {
+    display: none;
+  }
+
+  .layers__item.is-active .layers__button {
+    border-bottom-color: var(--tungsten);
+  }
+
+  .layers__detail {
+    display: none;
+    grid-row: 2;
+    grid-column: 1 / -1;
+    opacity: 1;
+  }
+
+  .layers__item.is-active .layers__detail {
+    display: block;
+  }
+
+  .layers__detail > div {
+    padding-left: 0;
+  }
+
+  .layers__detail p {
+    max-width: none;
+    padding-top: 12px;
+    font-size: 14px;
+  }
+
+  .layers__detail .layers__tools {
+    padding-bottom: 0;
+  }
+
+  /* work page */
+  .project__body {
+    grid-template-columns: 1fr;
+  }
+
+  .phone {
+    right: 4%;
+    bottom: -48px;
+    width: 22%;
+    border-radius: 16px;
+  }
+
+  /* about page: portrait first, then the CV */
+  .about {
+    grid-template-columns: 1fr;
+  }
+
+  .about__portrait {
+    position: relative;
+    top: 0;
+    height: 62vh;
+    min-height: 380px;
+  }
+
+  /* contact page */
+  .contact {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* short portrait screens (small phones) */
+@media (max-aspect-ratio: 1/1) and (max-height: 720px) {
+  .hero {
+    --fig-top: 0.19;
+    --fig-bottom: 0.64;
+  }
+
+  .hero__intro {
+    top: 64px;
+  }
+
+  .hero__name {
+    font-size: 1.9rem;
+  }
+
+  .hero__lede {
+    margin-top: 10px;
+    font-size: 13.5px;
+  }
+
+  .hero__intro .actions {
+    margin-top: 14px;
+  }
+
+  .layers__detail .layers__tools {
+    display: none;
+  }
+}
+
+/* tablets held upright */
+@media (min-width: 600px) and (max-aspect-ratio: 1/1) {
+  .hero {
+    --fig-x: 0.72;
+    --fig-top: 0.2;
+    --fig-bottom: 0.74;
+  }
+
+  .hero__intro {
+    width: 50%;
+  }
+
+  .hero__lede {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 16px;
+  }
+
+  .gallery,
+  .form__row,
+  .skills {
+    grid-template-columns: 1fr;
+  }
+
+  .cv__section {
+    grid-template-columns: 1fr;
+  }
+
+  .browser__bar {
+    height: 28px;
+  }
+
+  .browser__address {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero__lede {
+    font-size: 14.5px;
+  }
+}
+
+
+/* ==========================================================================
+   14. Reduced motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__grain {
+    animation: none;
+  }
+
+  .hero__letterbox {
+    display: none;
+  }
+
+  .hero__intro,
+  .layers__list,
+  .layers__button:hover {
+    transform: none;
+  }
+
+  .js .hero .layers {
+    transition: none;
+  }
+
+  .js .hero__name .line span,
+  .js .hero__lede,
+  .js .hero__intro .actions,
+  .js .layers__hint,
+  .js .layers__item,
+  .js .page-home .site-header,
+  .js [data-reveal],
+  .js .cv__name .line,
+  .js .cv__section[data-reveal] > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .js .hero__dial {
+    opacity: 1;
+    transform: translateX(-50%);
+    transition: none;
+  }
+
+  @view-transition {
+    navigation: none;
+  }
+}
+
+
+/* ==========================================================================
+   15. Print: the About page prints as a one-page CV
+   ========================================================================== */
+
+@media print {
+  html,
+  body {
+    background: #fff;
+    color: #111;
+    font-size: 11pt;
+  }
+
+  .site-header,
+  .site-footer,
+  .about__portrait,
+  .cv__intro .actions,
+  .contact-links .actions {
+    display: none;
+  }
+
+  .about {
+    display: block;
+    padding: 0;
+  }
+
+  .cv__name {
+    font-size: 34pt;
+  }
+
+  .cv__role,
+  .cv__text p,
+  .entry__meta,
+  .skills p,
+  .cv__facts dt {
+    color: #333;
+  }
+
+  .cv__section {
+    margin-top: 18pt;
+    padding-top: 10pt;
+    border-top: 0.5pt solid #bbb;
+    break-inside: avoid;
+  }
+
+  .entry-list li + li {
+    border-top-color: #ddd;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}

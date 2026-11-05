@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>About, Ivane Peikrishvili</title>
+  <meta name="description" content="CV of Ivane Peikrishvili, full-stack developer: profile, education, skills and projects.">
+  <meta name="theme-color" content="#0a0e19">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&display=swap">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="page-about">
+
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <a class="site-header__mark" href="index.html" aria-label="Ivane Peikrishvili, home">IP</a>
+    <nav class="site-nav" aria-label="Main">
+      <a aria-current="page" href="about.html">About</a>
+    </nav>
+    <p class="site-header__status">Open to new projects</p>
+  </header>
+
+  <main class="about container">
+
+    <!-- ===== Portrait (stays in view while the CV scrolls) ===== -->
+    <figure class="about__portrait">
+      <img src="assets/portrait-front.webp" width="260" height="844"
+           alt="Ivane Peikrishvili in a navy suit, facing the camera.">
+    </figure>
+
+    <!-- ===== CV ===== -->
+    <div class="cv">
+
+      <header class="cv__intro">
+        <h1 class="cv__name"><span class="line">Ivane</span> <span class="line">Peikrishvili</span></h1>
+        <p class="cv__role" data-reveal>Full-stack developer</p>
+        <div class="actions" data-reveal>
+          <button class="text-link link-button" type="button" data-print>Print or save as PDF</button>
+        </div>
+      </header>
+
+      <section class="cv__section" data-reveal id="contact" aria-labelledby="contact-title">
+        <h2 class="section-title" id="contact-title">Contact</h2>
+        <div class="contact-links">
+          <div>
+            <p class="direct__label">WhatsApp</p>
+            <p class="direct__value">+995 501 99 89 46</p>
+          </div>
+          <div>
+            <p class="direct__label">Email</p>
+            <p class="direct__value">ivapeik@gmail.com</p>
+          </div>
+          <div class="actions">
+            <a class="button" href="https://wa.me/995501998946" target="_blank" rel="noopener">Message on WhatsApp</a>
+            <a class="button" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=ivapeik@gmail.com" target="_blank" rel="noopener">Write an email</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="cv__section" data-reveal aria-labelledby="profile-title">
+        <h2 class="section-title" id="profile-title">Profile</h2>
+        <div class="cv__text">
+          <p>
+            I design and build websites and web applications end to end: the interface,
+            the API behind it, the database and the deployment. I like pages that load fast,
+            read clearly and stay easy to change after launch.
+          </p>
+          <p>
+            Recently I built a product site for a food producer and a lead-generation site
+            for a plastering crew, both for businesses in Georgia.
+          </p>
+        </div>
+      </section>
+
+      <section class="cv__section" data-reveal aria-labelledby="details-title">
+        <h2 class="section-title" id="details-title">Details</h2>
+        <dl class="cv__facts">
+          <dt>Born</dt>
+          <dd>8 March 2001</dd>
+          <dt>Age</dt>
+          <dd><span data-birthdate="2001-03-08">25</span></dd>
+          <dt>Focus</dt>
+          <dd>Full-stack web development</dd>
+          <dt>Availability</dt>
+          <dd>Open to new projects</dd>
+        </dl>
+      </section>
+
+      <section class="cv__section" data-reveal aria-labelledby="education-title">
+        <h2 class="section-title" id="education-title">Education</h2>
+        <!-- Add years or programme names to each entry if you like,
+             for example: <p class="entry__meta">Computer Science, 2019 to 2023</p> -->
+        <ul class="entry-list">
+          <li>
+            <h3 class="entry__title">Business and Technology University</h3>
+            <p class="entry__meta">BTU, Tbilisi</p>
+          </li>
+          <li>
+            <h3 class="entry__title">IT Step Academy Georgia</h3>
+            <p class="entry__meta">Software development</p>
+          </li>
+          <li>
+            <h3 class="entry__title">Skill Will</h3>
+            <p class="entry__meta">Web development courses</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="cv__section" data-reveal aria-labelledby="skills-title">
+        <h2 class="section-title" id="skills-title">Skills</h2>
+        <div class="skills">
+          <div>
+            <h3>Front end</h3>
+            <p>React, Next.js, TypeScript, HTML, CSS</p>
+          </div>
+          <div>
+            <h3>API layer</h3>
+            <p>REST, GraphQL, tRPC, OpenAPI</p>
+          </div>
+          <div>
+            <h3>Back end</h3>
+            <p>Node.js, PostgreSQL, Redis, Prisma</p>
+          </div>
+          <div>
+            <h3>Delivery</h3>
+            <p>Docker, AWS, Vercel, GitHub Actions</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="cv__section" data-reveal aria-labelledby="projects-title">
+        <h2 class="section-title" id="projects-title">Projects</h2>
+        <ul class="entry-list">
+          <li>
+            <h3 class="entry__title"><a href="https://shenimzareuli.ge/" target="_blank" rel="noopener">Sheni Mzareuli</a></h3>
+            <p class="entry__meta">2026. Product site for a food producer, with ordering through WhatsApp.</p>
+          </li>
+          <li>
+            <h3 class="entry__title">Lesva</h3>
+            <p class="entry__meta">2026. Lead-generation site for a mechanical plastering crew.</p>
+          </li>
+        </ul>
+      </section>
+
+
+    </div>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="site-footer__inner container">
+      <p>© <span data-year>2026</span> Ivane Peikrishvili</p>
+      <ul class="site-footer__links">
+        <li><a href="https://wa.me/995501998946" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=ivapeik@gmail.com" target="_blank" rel="noopener">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
