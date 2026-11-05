@@ -8,8 +8,11 @@
    - assets/turntable.webp holds 40 photos of the figure, one every 9 degrees,
      in a grid of 10 columns x 4 rows. Every 5th one is a real photo; the ones
      in between are single warped copies of the nearest real photo.
-   - The figure faces the visitor (0 degrees) and stays still until the mouse
-     points at it, a finger drags it or a layer is picked; then it turns back.
+   - The opening shot starts with the figure in side view (INTRO_FROM) and
+     turns him to face the visitor as the light comes on.
+   - After that the figure faces the visitor (0 degrees) and stays still until
+     the mouse points at it, a finger drags it or a layer is picked; then it
+     turns back.
    - The camera really orbits the stage. The figure always comes to rest on a
      real photo and only passes through the in-between frames while turning,
      so every pose you can stop on is a real one.
@@ -59,6 +62,10 @@
     afterPick: 4000    // ms after a layer button or arrow key
   };
   const HOVER_ZONE = 0.2;   // half-width of the area around the figure, as a share of the hero width
+
+  // Angle the opening shot starts from: 90 = side view, facing right.
+  // The figure turns from here to 0 (facing the visitor) during the intro.
+  const INTRO_FROM = 90;
 
   /* ------------------------------------------------------------------------
      2. Page elements
@@ -608,8 +615,8 @@
   // visitor points or drags it hops quickly from one real photo to the next.
   // Modes: intro, idle, hover, drag, glide (after a flick), settle, tween.
   const state = {
-    theta: 0,                           // camera / turntable angle
-    pose: 0,                            // angle of the photo shown
+    theta: reducedMotion ? 0 : INTRO_FROM,   // camera / turntable angle
+    pose: reducedMotion ? 0 : INTRO_FROM,    // angle of the photo shown
     target: 0,
     velocity: 0,
     mode: reducedMotion ? 'idle' : 'intro',
@@ -667,7 +674,8 @@
   }
 
   /* ------------------------------------------------------------------------
-     9. Opening shot: dark stage, the lamp flickers on, camera dollies in
+     9. Opening shot: dark stage, the lamp flickers on, the camera dollies in
+        and the figure turns from the side to face the visitor
      ------------------------------------------------------------------------ */
 
   const FLICKER = [[0, 0], [0.32, 0], [0.38, 0.5], [0.46, 0.06], [0.58, 0.72],
@@ -692,6 +700,7 @@
     const dolly = easeInOutCubic(clamp((t - 0.1) / 3.2, 0, 1));
     state.distance = lerp(8.6, CAMERA.distance, dolly);
     state.height = lerp(0.5, CAMERA.height, dolly);
+    state.theta = state.target = lerp(INTRO_FROM, 0, easeInOutCubic(clamp((t - 0.7) / 2.7, 0, 1)));
     state.light = lampAt(t - 0.2);
 
     if (!revealed && t > 2.2) {

@@ -30,11 +30,12 @@
   --ink: #0a0e19;                          /* page background, matched to the navy suit */
   --ink-raised: #111726;                   /* frames and surfaces */
   --tungsten: #e8b97e;                     /* the stage light; used sparingly */
-  --ivory: #ede6d8;                        /* main text */
-  --ivory-soft: rgba(237, 230, 216, 0.78); /* paragraphs */
-  --steel: #8c94a6;                        /* secondary text */
-  --line: rgba(237, 230, 216, 0.12);       /* hairlines */
-  --line-strong: rgba(237, 230, 216, 0.3);
+  --blue: #9cbcf2;                         /* name and logo: the cool back light */
+  --ivory: #dfe8f7;                        /* main text: pale ice blue */
+  --ivory-soft: rgba(223, 232, 247, 0.8);  /* paragraphs */
+  --steel: #8e9dbc;                        /* secondary text: blue-grey */
+  --line: rgba(223, 232, 247, 0.12);       /* hairlines */
+  --line-strong: rgba(223, 232, 247, 0.3);
 
   /* type */
   --font-display: "Changa One", "Arial Black", Impact, sans-serif;
@@ -158,6 +159,7 @@ a {
 }
 
 .site-header__mark {
+  color: var(--blue);
   justify-self: start;
   font-family: var(--font-display);
   font-size: 21px;
@@ -245,7 +247,7 @@ a {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 7px;
-  text-decoration-color: rgba(237, 230, 216, 0.35);
+  text-decoration-color: rgba(223, 232, 247, 0.35);
   transition: text-decoration-color 0.3s;
 }
 
@@ -462,6 +464,7 @@ a {
 }
 
 .hero__name {
+  color: var(--blue);
   font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(3.1rem, 7.3vw, 8.6rem);
@@ -999,6 +1002,7 @@ a {
 }
 
 .cv__name {
+  color: var(--blue);
   font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(3rem, 6.4vw, 6rem);
